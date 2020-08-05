@@ -32,9 +32,18 @@ def write_review():
     return jsonify({'result': 'success'})
 
 
-@app.route('/review', methods=['GET'])
+@app.route('/review', methods=['GET'])    # 라우팅 하는 url은 같은데 위는 포스트 여긴 겟/ 이렇게 설계 가능
 def read_reviews():
-    return jsonify({'result': 'success', 'msg': '이 요청은 GET!'})
+    condition = {}  #조건이 없으므로 다 가지고온다는 뜻
+    reviews = list(db.review.find(condition, {'_id': 0}))   # 파이몽고가 다 가지고 오되, _id는 제외하고 가지고온다.
+    result = {
+        'result': 'success',
+        'reviews': reviews
+    }
+    ##파이몽고의 리스트는 접속정보 등이 들어있는데, 이걸 제이선으로 바꾸어야 하는데 이때 list라는 함수로 전체를 감싸줌.
+    ##즉 파이몽고가 주는 리스트를 제이선으로 사용할 수 있는 파이썬 리스트로 변경해줌.
+
+    return jsonify(result)
 
 
 if __name__ == '__main__':
