@@ -1,4 +1,4 @@
-# Sparta
+# Created by https://www.toptal.com/developers/gitignore/api/python,windows,macos,linux,flask,pycharm+all
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,windows,macos,linux,flask,pycharm+all
 ### Flask ###
 instance/*
