@@ -70,8 +70,24 @@
                     url: "/review",
                     data: {},
                     success: function (response) {
+                        console.log('test')
                         if (response["result"] == "success") {
-                            alert(response["msg"]);
+                            var reviews = response['reviews'];
+                            console.log(reviews);
+                            for(let i = 0; i < response['reviews'].length; i++) {
+                                var review = reviews[i];
+                                console.log(review);
+                                var tempHtml = `<tr>
+                                <td>${review['title']}</td>
+                                <td>${review['author']}</td>
+                                <td>${review['review']}</td>
+                            </tr>`;
+                                console.log(tempHtml);
+                             $('#reviews-box').append(tempHtml);
+                            }
+
+
+
                         } else {
                             alert("리뷰를 받아오지 못했습니다");
                         }
