@@ -23,16 +23,39 @@
                 showReview();
             });
             function makeReview() {
-                // 1. 제목, 저자, 리뷰 내용을 가져옵니다.
+                // 1. 제목, 저자, 리뷰 내용을 가져옵니다. 인풋창의 값을 제이쿼리로 가져온다.
+                var title = $('#title').val();   //<input type="text" class="form-control" id="title">
+                var author = $('#author').val();
+                var review = $('#bookReview').val();
+
                 // 2. 제목, 저자, 리뷰 중 하나라도 입력하지 않았을 경우 alert를 띄웁니다.
+
+
+                // 유효성 검사
+                if (title == '') {
+                    alert('제목을 입력해주세요.')
+                    return
+                }
+                if (author == '') {
+                    alert('제목을 입력해주세요.')
+                    return
+                }
+                if (review == '') {
+                    alert('제목을 입력해주세요.')
+                    return
+                }
+
+
                 // 3. POST /review 에 저장을 요청합니다.
                 $.ajax({
                     type: "POST",
-                    url: "/review",
-                    data: {},
+                    url: "/review",         //리뷰 앞에 유알엘이 없는 이유는 나자신한테 다시 보낼거라서
+                    data: {'title_give' : title, 'author_give' : author, 'review_give' : review},               //데이터 중괄호 안이 중요
+                    //백엔드랑 유알엘, 데이터를 맞춰줘야해. 그래서 두개 열어놓고 작업, 그래야 플라스크가 받을수 있음.
+
                     success: function (response) {
                         if (response["result"] == "success") {
-                            alert(response["msg"]);
+                            alert('리뷰를 저장했습니다.');
                             window.location.reload();
                         }
                     }
